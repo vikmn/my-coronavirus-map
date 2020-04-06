@@ -45,34 +45,7 @@ const IndexPage = () => {
    * @example Here this is and example of being used to zoom in and set a popup on load
    */
 
-  async function mapEffect({ leafletElement } = {}) {
-    if ( !leafletElement ) return;
-
-    const popup = L.popup({
-      maxWidth: 800
-    });
-
-    const location = await getCurrentLocation().catch(() => LOCATION );
-
-    const { current = {} } = markerRef || {};
-    const { leafletElement: marker } = current;
-
-    marker.setLatLng( location );
-    popup.setLatLng( location );
-    popup.setContent( popupContentHello );
-
-    setTimeout( async () => {
-      await promiseToFlyTo( leafletElement, {
-        zoom: ZOOM,
-        center: location
-      });
-
-      marker.bindPopup( popup );
-
-      setTimeout(() => marker.openPopup(), timeToOpenPopupAfterZoom );
-      setTimeout(() => marker.setPopupContent( popupContentGatsby ), timeToUpdatePopupAfterZoom );
-    }, timeToZoom );
-  }
+  async function mapEffect({ leafletElement: map } = {}) {}
 
   const mapSettings = {
     center: CENTER,
